@@ -6,17 +6,33 @@
             @method('PUT')
             @csrf
             <div class="row justify-content-center">
-                <div class="col-8 row mb-2">
+
+                {{-- errors --}}
+                @if ($errors->any())
+                    <div class="col-8 row mb-3 mt-3 alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>
+                                    {{ $error }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                {{-- / errors --}}
+
+                <div class="col-8 row mb-2 form-group">
                     <div class="col-2">
                         <label for="title">title</label>
                     </div>
 
                     <div class="col-10">
-                        <input type="text" name="title">
+                        <input class="form-control" type="text" name="title"
+                            value="{{ old('title', $project->title) }}">
                     </div>
                 </div>
 
-                <div class="col-8 row">
+                <div class="col-8 row form-group">
                     <div class="col-2">
                         <label for="description">
                             description
@@ -24,7 +40,7 @@
                     </div>
 
                     <div class="col-10">
-                        <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                        <textarea class="form-control" name="description" id="description" cols="30" rows="10">{{ old('description', $project->title) }}</textarea>
                     </div>
                 </div>
             </div>

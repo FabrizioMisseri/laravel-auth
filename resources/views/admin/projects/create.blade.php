@@ -5,17 +5,32 @@
         <form action="{{ route('admin.projects.store') }}" method="POST">
             @csrf
             <div class="row justify-content-center">
-                <div class="col-8 row mb-2">
+
+                {{-- errors --}}
+                @if ($errors->any())
+                    <div class="col-8 row mb-3 mt-3 alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>
+                                    {{ $error }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                {{-- / errors --}}
+
+                <div class="col-8 row mb-2 form-group">
                     <div class="col-2">
                         <label for="title">title</label>
                     </div>
 
                     <div class="col-10">
-                        <input type="text" name="title">
+                        <input type="text" name="title" value="{{ old('title') }}" class="form-control">
                     </div>
                 </div>
 
-                <div class="col-8 row">
+                <div class="col-8 row form-group">
                     <div class="col-2">
                         <label for="description">
                             description
@@ -23,7 +38,7 @@
                     </div>
 
                     <div class="col-10">
-                        <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                        <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{ old('description') }}</textarea>
                     </div>
                 </div>
             </div>

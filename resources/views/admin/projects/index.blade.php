@@ -3,6 +3,19 @@
 @section('content')
     <div class="container mt-4">
         <h3 class="text-center">La lista dei projects</h3>
+        {{-- message --}}
+        @if (session('message'))
+            <div class="row justify-content-center">
+                <div class="col-8 mb-3 mt-3">
+                    <p class="alert alert-success">
+                        {{ session('message') }}
+                    </p>
+                </div>
+            </div>
+        @endif
+        {{-- / message --}}
+
+        {{-- crea --}}
         <div class="row justify-content-end mt-4 mb-4">
             <div class="col-3">
                 <a href=" {{ route('admin.projects.create') }} " class="btn btn-primary">
@@ -10,6 +23,9 @@
                 </a>
             </div>
         </div>
+        {{-- / crea --}}
+
+        {{-- TABLE --}}
         <div class="row justify-content-center">
             <div class="col-8">
                 <table class="table">
@@ -25,6 +41,7 @@
                             <tr>
                                 <th scope="row">{{ $project->title }}</th>
                                 <td>{{ $project->slug }}</td>
+                                {{-- area buttoni --}}
                                 <td>
                                     <a class="btn btn-success" href="{{ route('admin.projects.show', $project->slug) }}">
                                         <i class="fa-solid fa-eye"></i>
@@ -41,11 +58,14 @@
                                         </button>
                                     </form>
                                 </td>
+                                {{-- / area buttoni --}}
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
+        {{-- / TABLE --}}
+
     </div>
 @endsection

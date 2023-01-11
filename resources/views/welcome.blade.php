@@ -17,7 +17,9 @@
             <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in
                 previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your
                 liking.</p>
-            <button class="btn btn-primary btn-lg" type="button">Example button</button>
+            <div class="mt-4 mb-5">
+                <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">dashboard</a>
+            </div>
         </div>
     </div>
 
@@ -26,9 +28,7 @@
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora temporibus, dicta nemo aliquam totam nisi
                 deserunt soluta quas voluptatum ab beatae praesentium necessitatibus minus, facilis illum rerum officiis
                 accusamus dolores!</p>
-            <div class="mt-4 mb-5">
-                <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">dashboard</a>
-            </div>
+
         </div>
     </div>
 @endsection

@@ -46,8 +46,8 @@ class ProjectController extends Controller
         // $post->fill($form_data);
         // $post->save();
         $data = Project::create($data);
-        return redirect()->route('admin.projects.index');
-        // ->with('message', 'Il project è sato creato con successo')
+        return redirect()->route('admin.projects.index')->with('message', 'Il project è sato creato con successo');
+        // 
     }
 
     /**
@@ -81,11 +81,11 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $data['slug'] = Project::generateSlug($data['title']);
         $project->update($data);
 
-        return redirect()->route('admin.projects.index');
+        return redirect()->route('admin.projects.index')->with('message', "Il project '$project->slug' è sato modificato con successo");
     }
 
     /**
@@ -97,6 +97,6 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
-        return redirect()->route('admin.projects.index');
+        return redirect()->route('admin.projects.index')->with('message', "Il project '$project->slug' è sato cancellato");
     }
 }
