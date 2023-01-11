@@ -27,7 +27,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -38,6 +38,14 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
+        $data = $request->validated();
+        $data['slug'] = Project::generateSlug($data['title']);
+        // $post = new Post();
+        // $post->fill($form_data);
+        // $post->save();
+        $data = Project::create($data);
+        return redirect()->route('admin.projects.index');
+        // ->with('message', 'Il project è sato creato con successo')
     }
 
     /**

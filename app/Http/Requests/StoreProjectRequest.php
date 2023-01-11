@@ -13,7 +13,7 @@ class StoreProjectRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
         // True
     }
 
@@ -25,7 +25,10 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            // validazioni....
+
+            'title' => ['required', 'max:150', 'unique:projects'],
+            'content' => ['nullable']
+
         ];
     }
 
