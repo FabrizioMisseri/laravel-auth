@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="container mt-5">
-        <form action="{{ route('admin.projects.store') }}" method="POST">
+        <form action="{{ route('admin.projects.update', $project->slug) }}" method="POST">
+            @method('PUT')
             @csrf
             <div class="row justify-content-center">
                 <div class="col-8 row mb-2">
@@ -31,7 +32,7 @@
             <div class="row mt-4 mb-5 justify-content-start">
                 <div class="offset-2 col-1">
                     <button type="submit" class="btn btn-primary">
-                        CREA
+                        MODIFICA
                     </button>
                 </div>
             </div>
