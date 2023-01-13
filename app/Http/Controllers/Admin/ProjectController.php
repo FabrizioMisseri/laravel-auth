@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateProjectRequest;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -42,10 +43,11 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
         $data['slug'] = Project::generateSlug($data['title']);
-        // $post = new Post();
-        // $post->fill($form_data);
-        // $post->save();
-        $data = Project::create($data);
+        if ($request->hasFile('cover_image')) {
+            $path = Storage::put('post_images', $request->cover_image);
+            $data['cover_image'] = $path;
+        }
+        Project::create($data);
         return redirect()->route('admin.projects.index')->with('message', 'Il project è sato creato con successo');
         // 
     }
