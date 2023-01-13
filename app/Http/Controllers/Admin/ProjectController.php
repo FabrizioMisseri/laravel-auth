@@ -44,7 +44,7 @@ class ProjectController extends Controller
         $data = $request->validated();
         $data['slug'] = Project::generateSlug($data['title']);
         if ($request->hasFile('cover_image')) {
-            $path = Storage::put('post_images', $request->cover_image);
+            $path = Storage::put('projects_images', $request->cover_image);
             $data['cover_image'] = $path;
         }
         Project::create($data);
@@ -85,6 +85,13 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
         $data['slug'] = Project::generateSlug($data['title']);
+        if ($request->hasFile('cover_image')) {
+            if ($project->cover_image) {
+                Storage::delete($project->cover_image);
+            }
+            $path = Storage::put('projects_images', $request->cover_image);
+            $form_data['cover_image'] = $path;
+        }
         $project->update($data);
 
         return redirect()->route('admin.projects.index')->with('message', "Il project '$project->slug' è sato modificato con successo");
@@ -98,6 +105,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->cover_image) {
+            Storage::delete($project->cover_image);
+        }
         $project->delete();
         return redirect()->route('admin.projects.index')->with('message', "Il project '$project->slug' è sato cancellato");
     }

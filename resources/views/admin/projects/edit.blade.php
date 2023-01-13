@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mt-5">
-        <form action="{{ route('admin.projects.update', $project->slug) }}" method="POST">
+        <form action="{{ route('admin.projects.update', $project->slug) }}" enctype="multipart/form-data" method="POST">
             @method('PUT')
             @csrf
             <div class="row justify-content-center">
@@ -44,6 +44,18 @@
                     </div>
                 </div>
             </div>
+
+            {{-- IMG --}}
+            <div class="col-8 row form-group mt-2">
+                <div class="col-2">
+                    <label for="cover_image">image</label>
+                </div>
+
+                <div class="col-10">
+                    <input type="file" name="cover_image" id="cover_image">
+                </div>
+            </div>
+            {{-- / IMG --}}
 
             <div class="row mt-4 mb-5 justify-content-start">
                 <div class="offset-2 col-1">
